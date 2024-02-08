@@ -1,11 +1,14 @@
 class WordScrambleGame {
     constructor() {
-        // 1. Select DOM elements
-        this.wordText = document.querySelector('.scram-word'); // Selects the element with class 'scram-word'
-        this.hintText = document.querySelector('.hintSpan'); // Selects the element with class 'hintSpan'
-        this.newWordButton = document.getElementById('newWrdBtn'); // Selects the button with id 'newWrdBtn'
+        // Select elements
+        this.wordText = document.querySelector('.scram-word'); 
+        this.hintText = document.querySelector('.hintSpan');
+        this.newWordButton = document.getElementById('newWrdBtn'); 
+        this.checkButton = document.getElementById('checkBtn')
+        this.inputBox = document.getElementById('wordInput');
+        this.messageBox = document.getElementById('messageBox');
 
-        // 2. Define array of words and hints
+        // Define array of words and hints
         this.words = [
             {
                 word: 'family',
@@ -25,26 +28,57 @@ class WordScrambleGame {
             }
         ];
 
-        // 3. Initialize the game
+        // Initialize the game
         this.init();
-        // 5. Add event listener for the "New Word" button
-        this.newWordButton.addEventListener('click', this.init.bind(this));
+
+        // Add event listeners
+        this.newWordButton.addEventListener('click', () => {
+            this.shuffle();
+        });
+
+        this.checkButton.addEventListener('click', () => {
+            this.check();
+        });
     }
 
     init() {
-        // 4. Select a random word from the array and its hint
-        let wordObj = this.words[Math.floor(Math.random() * this.words.length)];
-        let wordArr = wordObj.word.split(""); // Split the word into an array of characters
+        this.shuffle(); // Shuffle the word and initialize the correct word
+    }
 
+    // Method to shuffle the characters of a word into a random order
+    shuffle() {
+        // Select a random word object
+        let wordObj = this.words[Math.floor(Math.random() * this.words.length)];
+        // Store the correct word separately
+        this.correctWord = wordObj.word;
+        
         // Shuffle the characters of the word array
+        let wordArr = wordObj.word.split("");
         for (let i = wordArr.length - 1; i > 0; i--) {
             let p = Math.floor(Math.random() * (i + 1));
             [wordArr[i], wordArr[p]] = [wordArr[p], wordArr[i]];
         }
 
-        // Update the UI to display the scrambled word and its corresponding hint
-        this.wordText.innerText = wordArr.join(''); // Display the scrambled word
-        this.hintText.innerText = wordObj.hint; // Display the hint
+        // Display the shuffled word
+        this.wordText.innerText = wordArr.join('');
+        // Display the hint
+        this.hintText.innerText = wordObj.hint;
+    }
+
+    // Method for checking if the typed answer matches the correct word
+    check() {
+        let answerBox = this.inputBox.value.toLowerCase().trim(); // Convert the input to lowercase for case-insensitive comparison
+        
+        if (answerBox === '') {
+            // If the input box is empty, do nothing
+            return;
+        }
+
+        if (answerBox !== this.correctWord) {
+            this.messageBox.innerText = `${answerBox} is obviously not the answer`;
+        } else {
+            this.messageBox.innerText = `I'm surprised you know that word`;
+        }
     }
 }
 

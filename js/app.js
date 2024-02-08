@@ -1,63 +1,113 @@
+class WordScrambleGame {
+    constructor() {
+        // 1. Select DOM elements
+        this.wordText = document.querySelector('.scram-word'); 
+        this.hintText = document.querySelector('.hintSpan');
+        this.newWordButton = document.getElementById('newWrdBtn'); 
+        this.checkButton = document.getElementById('checkBtn')
+        this.inputBox = document.getElementById('wordInput')
+        this.message = document.getElementById('messageBox')
 
 
+        // 2. Define array of words and hints
+        this.words = [
+            {
+                word: 'family',
+                hint: 'Dom Torettos most prized possesion'
+            },
+            {
+                word: 'countryside',
+                hint: 'a place with no skyrise buildings. Just hard work and mean cows'
+            },
+            {
+                word: 'money',
+                hint: 'newtons first law of motion says you need some of this'
+            },
+            {
+                word: 'coding',
+                hint: 'what was done to make this game!'
+            }
+        ];
 
-
-const wordText = document.querySelector('.scram-word')
-const hintText = document.querySelector('.hintSpan')
-const timeText = document.querySelector('.time')
-const textBox = document.getElementById('wordInput')
-const newWord = document.getElementById('newWrdBtn')
-const checkBtn = document.getElementById('checkBtn')
-
-const words = [
-    {
-        word: 'family',
-        hint: 'Dom Torettos most prized possesion'
-    },
-    {
-        word: 'countryside',
-        hint: 'a place with no skyrise buildings. Just hard work and mean cows'
-    },
-    {
-        word: 'money',
-        hint: 'newtons first law of motion says you need some of this'
-    },
-    {
-        word: 'coding',
-        hint: 'what was done to make this game!'
+        // 3. Initialize the game
+        this.init();
+        // 5. Add event listener for the "New Word" button
+        this.newWordButton.addEventListener('click', ()=> {
+            this.shuffle();
+        });
+        this.checkButton.addEventListener('click', ()=> {
+            this.check()
+        })
     }
-]
 
-const init = () => {
-    let wordObj = words[Math.floor(Math.random() * words.length)] // should get random word and hint
-    let wordArr = wordObj.word.split("") // split words into indiviual letters //learn more about split method
-    for (let i = wordArr.length - 1; i > 0; i--) {
-        let p = Math.floor(Math.random() * (i + 1)); // pull random number //
-        // shuffle words array at random?
-        [ wordArr[i], wordArr[p]] = [ wordArr[p], wordArr[i]] 
+    init() {
+        this.shuffle()
+        // this.correct()
+        this.check()
+        // 4. Select a random word from the array and its hint
+        // let wordObj = this.words[Math.floor(Math.random() * this.words.length)];
+        // let wordArr = wordObj.word.split(""); // Split the word into an array of characters
+
+        // Shuffle the characters of the word array
+        // for (let i = wordArr.length - 1; i > 0; i--) {
+        //     let p = Math.floor(Math.random() * (i + 1));
+        //     [wordArr[i], wordArr[p]] = [wordArr[p], wordArr[i]];
+        // }
+
+        // Update the UI to display the scrambled word and its corresponding hint
+        // this.wordText.innerText = wordArr.join(''); // Display the scrambled word
+        // this.hintText.innerText = wordObj.hint; // Display the hint
     }
 
-    // create p element
-    const scramWord = document.createElement('p')
-    scramWord.classList.add('scram-word', 'text-align-center', 'text-uppercase')
-    scramWord.setAttribute('id', 'scramWord')
 
-    scramWord.innerText = wordArr // pass word array through 
-    const wordDiv = document.getElementById('wordDiv')
-    wordDiv.appendChild(scramWord)
+    // method to shuffle the characters of a word into a random order
+    shuffle() {
+        let wordObj = this.words[Math.floor(Math.random() * this.words.length)]; // gets random object from words
+        let wordArr = wordObj.word.split(""); // Split the word into an array of characters
 
-    // create hint 
-    const hintCrea = document.createElement('p')
-    hintCrea.classList.add('hint')
-    hintCrea.setAttribute('id', 'hint')
+        this.correctWord = wordObj.word
 
-    hintText.innerText = wordObj.hint // pass hint array through
-    // const hint = `<p class="hint" Hint: <span> ${hintText} </span> </p>`
-    const hintDiv = document.getElementById('hintDiv')
-    hintDiv.appendChild(hintCrea)
-    console.log(wordArr, wordObj.word)
+        // Shuffle the characters of the word array (wordArr)
+        for (let i = wordArr.length - 1; i > 0; i--) {
+            let p = Math.floor(Math.random() * (i + 1));
+            [wordArr[i], wordArr[p]] = [wordArr[p], wordArr[i]];
+        }
+
+        this.wordText.innerText = wordArr.join(''); // Display the scrambled word
+        this.hintText.innerText = wordObj.hint; // Display the hint
+    }
+
+    // method for correct word that i apparently do not need
+    // correct() {
+    //     let wordObj = this.words[Math.floor(Math.random() * this.words.length)];
+    //     let correctWrd;
+
+    //     correctWrd = wordObj // random word = correct word
+    //     console.log(correctWrd);
+
+    // }
+
+    // method for checking if the typed answer matches word array
+    check() {
+        let answerBox = this.inputBox.value.toLowerCase()
+        // let correctWord = this.correct()
+        let answer = this.wordText.innerText.toLowerCase().trim(); // Get the word displayed on the screen and convert it to lowercase
+
+        if (answerBox.trim() === '') {
+            return  // if anything text is entered do nothing
+        }
+
+
+        // console.log(answerBox);
+        if (answerBox !== this.correctWord) {
+            this.message.innerText = `${answerBox} is obviously not the answer`
+        } else {
+            this.message.innerText = `I'm suprised you know that word`
+        }
+    }
+
+    
 }
 
-init()
-
-newWord.addEventListener('click',init)
+// Instantiate the WordScrambleGame class
+const game = new WordScrambleGame();
