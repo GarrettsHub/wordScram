@@ -17,21 +17,35 @@
 
     <main class="main" id="main">
         <div class="container content-hold">
-            <div class="content">
+            <div class="content ">
                 <h2 class="game-title">ScrambleUnscramble</h2>
-                <div id="wordDiv"></div>
-                <p class="scram-word text-align-center text-uppercase">milyfa</p>
+                <p class="score-text">Score: <span class="score">0</span></p>
+                <div id="wordDiv">
+                    <p class="scram-word text-align-center text-uppercase"></p>
+                </div>
                 <div class="details">
                     <div id="hintDiv"></div>
                     <p class="hint">Hint: <span class="hintSpan">something you have (or dont)</span></p>
-                    <p class="time">Time Left: <span class="timer fw-bold">30</span>s</p>
+                    <p class="time">Time Left: <span class="timer fw-bold"></span>s</p>
                 </div>
                 <input type="text" class="word-input" id="wordInput" value="">
                 <div class="buttons d-flex justify-content-between mt-3">
-                    <button class="btn my-btn btn-danger new-button" id="newWrdBtn">New Word</button>
+                    <button class="btn my-btn btn-danger new-button" id="newWrdBtn">Reset Game</button>
                     <button class="btn my-btn btn-info check-button" id="checkBtn">Check Word</button>
                 </div>
-                <div id="messageBox"></div>
+            </div>
+            <div id="messageBox"></div>
+            <div id="timeUp" class="d-none">
+                <div class="time-up-content">
+                    <h2 class="over-title">Game Over!</h2>
+                    <div class="hi-scores">
+                        <p class="hi-text">High Scores: </p>
+                        <ol class="hi-list">
+                            <li class="hi-item"></li>
+                        </ol>
+                    </div>
+                    <button class="btn restart-btn btn-danger">Try again</button>
+                </div>
             </div>
         </div>
     </main>
