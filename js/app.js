@@ -13,6 +13,8 @@ class WordScrambleGame {
         this.correctWord = ''
         this.contentHold = document.querySelector('.content')
         this.restart = document.querySelector('.restart-btn')
+        this.scoreDisplay = document.querySelector('.score')
+
 
         this.inputBox.focus()
 
@@ -20,53 +22,69 @@ class WordScrambleGame {
         this.words = [
             {
                 word: 'family',
-                hint: 'Dom Torettos most prized possesion'
+                hint: 'Dom Torettos most prized possesion',
+                points: 2
             },
             {
                 word: 'countryside',
-                hint: 'a place with no skyrise buildings. Just hard work and mean cows'
+                hint: 'a place with no skyrise buildings. Just hard work and mean cows',
+                points: 5
             },
             {
                 word: 'money',
-                hint: 'newtons first law of motion says you need some of this'
+                hint: 'newtons first law of motion says you need some of this',
+                points: 1
             },
             {
                 word: 'coding',
-                hint: 'what was done to make this game!'
+                hint: 'what was done to make this game!',
+                points: 1
             },
             {
                 word: 'forgot',
-                hint: 'wait what was i talking about again?'
+                hint: 'wait what was i talking about again?',
+                points: 1
             },
             {
                 word: 'spokesperson',
-                hint: 'something that your mom is when you go to the doctors office'
+                hint: 'something that your mom is when you go to the doctors office',
+                points: 7
             },
             {
                 word: 'horseshoe',
-                hint: 'horses wear this with their calm luh fit'
+                hint: 'horses wear this with their calm luh fit',
+                points: 4
             },
             {
                 word: 'absent',
-                hint: 'your father falls under this adjective'
+                hint: 'your father falls under this adjective',
+                points: 2
             },
             {
                 word: 'convict',
-                hint: 'do NOT call Al Capone this'
+                hint: 'do NOT call Al Capone this',
+                points: 3
+            },
+            {
+                word: 'sister',
+                hint: 'a born loser (you know who you are)',
+                points: 2
             }
         ];
 
         // (forgot number but we still up) set score property?
         this.score = {
-            currScore: 0
+            currScore: 0,
+            hiScore: 0
         }
 
         // 3. Initialize the game (not sure if the positioning of this matters too much)
         this.init();
-        // 4. Add event listener for the my buttons (not sure why they only work in the constructor but it makes sense in a way)
+        // 4. Add event listener for the my buttons 
         this.newWordButton.addEventListener('click', ()=> {
             this.shuffle();
             this.clear();
+            this.scoreClear()
             // this.clock()
             // this.resetClock()
         });
@@ -80,6 +98,8 @@ class WordScrambleGame {
                 document.getElementById('checkBtn').click()
             }
         })
+
+
     }
 
     // initalizer 
@@ -108,19 +128,32 @@ class WordScrambleGame {
 
     // simple method for displaying socre!!!! (order is getting out of hand but we ball)
     scoreKeep() {
-        const scoreDisplay = document.querySelector('.score')
-
-        scoreDisplay.innerText = this.score.currScore
+        this.scoreDisplay.innerText = this.score.currScore
+        
     }
 
+    hiScore() {
+        const hiScoreDisplay = document.querySelector('.hi-item')
+
+        if (this.gameOver() && this.score.currScore > this.score.hiScore) {
+            this.score.hiScore = this.score.currScore
+        }
+        hiScoreDisplay.innerText = this.score.hiScore
+    }
+
+    scoreClear() {
+        this.score.currScore = 0
+        this.scoreDisplay.innerText = this.score.currScore
+    }
 
     // 5. method to shuffle the characters of a word into a random order
     shuffle() {
         let wordObj = this.words[Math.floor(Math.random() * this.words.length)]; // gets random object from words
         let wordArr = wordObj.word.split(""); // Split the word into an array of characters
+        let points = wordObj.points
 
         this.correctWord = wordObj.word
-        console.log(this.correctWord, wordObj.word);
+        console.log(points);
 
         // Shuffle the characters of the word array (wordArr)
         for (let i = wordArr.length - 1; i > 0; i--) {
@@ -218,6 +251,9 @@ class WordScrambleGame {
             this.overlay.classList.remove('d-block')
             this.contentHold.classList.remove('d-none')
             this.contentHold.classList.add('d-block')
+            this.clear()
+            this.shuffle()
+            this.scoreClear()
         })
     }
 

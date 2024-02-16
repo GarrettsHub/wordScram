@@ -81,17 +81,11 @@ body {
     z-index: 2;
 }
 
-.time-up-content {
+.time-up-text {
     position: absolute;
-    background-color: whitesmoke;
-    width: 50%;
     top: 50%;
     left: 50%;
     font-size: 50px;
-    color: black;
+    color: white;
     transform: translate(-50%, -50%);
-}
-
-.score-text {
-    /* border: 5px solid black; */
 }
