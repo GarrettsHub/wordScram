@@ -89,3 +89,17 @@ body {
     color: white;
     transform: translate(-50%, -50%);
 }
+
+.start-game {
+    margin: 25px 20px 25px;
+    align-items: center;
+}
+
+.play-btn-div {
+    text-align: center;
+}
+
+.yap-text {
+    font-size: 26px;
+    padding: 25px;
+}

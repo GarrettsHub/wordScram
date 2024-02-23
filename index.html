@@ -17,7 +17,16 @@
 
     <main class="main" id="main">
         <div class="container content-hold">
-            <div class="content ">
+            <div class="start-game" id="startGame">
+                <div class="intro-text d-flex">
+                    <p class="yap-text">Welcome to Word Unscramble! Try to guess as many scrambled words correctly in 30 seconds. Good luck and have fun or not!</p>
+                    <img src="images/moneybob.jpeg" alt="spongebob but with money">
+                </div>
+                <div class="play-btn-div ">
+                    <button class="btn play-btn btn-success" id="playBtn">Play!</button>
+                </div>
+            </div>
+            <div class="content d-none">
                 <h2 class="game-title">ScrambleUnscramble</h2>
                 <p class="score-text">Score: <span class="score">0</span></p>
                 <div id="wordDiv">
@@ -38,6 +47,7 @@
             <div id="timeUp" class="d-none">
                 <div class="time-up-text">
                     <h2 class="over-title">Game Over!</h2>
+                    <p class="High-score-text">You finished with <span class="hi-score"></span> points!</p>
                     <button class="btn restart-btn btn-danger">Try again</button>
                 </div>
             </div>

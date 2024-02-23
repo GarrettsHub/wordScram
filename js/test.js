@@ -279,3 +279,119 @@ class WordScrambleGame {
 
 // Instantiate the WordScrambleGame class
 const game = new WordScrambleGame();
+
+
+
+class WordScrambleGame {
+    constructor() {
+        // Other constructor code...
+
+        // Boolean flag to track if the correct word has been guessed
+        this.correctAnswer = false;
+    }
+
+    // Other methods...
+
+    check() {
+        let answerBox = this.inputBox.value.toLowerCase();
+
+        if (answerBox.trim() === '') {
+            return;  // If anything is entered, do nothing
+        }
+
+        // If the correct word has already been guessed, do nothing
+        if (this.correctAnswer) {
+            return;
+        }
+
+        let wordObj = this.words.find(word => word.word === this.correctWord); // Find the word object from the array
+        this.points = wordObj.points; // Assign points associated with the current word
+
+        if (answerBox !== this.correctWord) {
+            this.message.innerText = `${answerBox} is obviously not the answer`;
+            this.inputBox.value = '';
+        } else {
+            this.message.innerText = `I'm surprised you know that word`;
+            this.shuffle();
+            this.inputBox.value = '';
+            this.inputBox.focus();
+            this.score.currScore += this.points; // Add points associated with the current word
+            this.scoreKeep(); // Update the displayed score
+            this.correctAnswer = true; // Set the flag to true since the correct word has been guessed
+        }
+    }
+}
+
+check() {
+    let answerBox = this.inputBox.value.toLowerCase();
+
+    if (answerBox.trim() === '') {
+        return; // If no text is entered, do nothing
+    }
+
+    if (answerBox !== this.correctWord) {
+        this.message.innerText = `${answerBox} is obviously not the answer`;
+        this.inputBox.value = '';
+    } else {
+        if (!this.correctAnswer) {
+            // Update the score only if the correct word hasn't been typed before
+            this.score.currScore += this.points;
+            this.scoreKeep();
+            this.correctAnswer = true; // Set the flag to true indicating the correct word has been typed
+        }
+        this.message.innerText = `I'm surprised you know that word`;
+        this.shuffle(); // Display a new word
+        this.inputBox.value = '';
+        this.inputBox.focus();
+    }
+}
+
+
+check() {
+    let answerBox = this.inputBox.value.toLowerCase().trim();
+
+    if (answerBox === this.correctWord) {
+        // Find the current word object and get its points
+        let currentWordObj = this.words.find(wordObj => wordObj.word === this.correctWord);
+        let points = currentWordObj.points || 0;
+
+        // Update the score and display
+        this.score.currScore += points;
+        this.scoreKeep();
+
+        // Display message and shuffle for the next word
+        this.message.innerText = `You got it! ${points} points added.`;
+        this.shuffle();
+        this.inputBox.value = '';
+        this.inputBox.focus();
+    } else {
+        this.message.innerText = `${answerBox} is not the correct word. Try again.`;
+    }
+}
+
+
+  // Find the current word object and get its points
+  let currentWordObj = this.words.find(wordObj => wordObj.word === this.correctWord);
+  let points = currentWordObj.points || 0
+
+  // Update the score and display
+  this.score.currScore += points
+  this.scoreKeep();
+  // Display message and shuffle for the next word
+  this.message.innerText = `I'm surprised you know that word`
+  this.shuffle();
+  this.inputBox.value = ''
+  this.inputBox.focus()
+
+
+            let currentWordObj = this.words.find(wordObj => wordObj.word === this.correctWord);
+            let points = currentWordObj.points || 0
+            this.correctAnswer = true
+            // Update the score and display
+            this.score.currScore += points
+            this.scoreKeep();
+            // Display message and shuffle for the next word
+            this.message.innerText = `I'm surprised you know that word`
+            this.shuffle();
+            this.inputBox.value = ''
+            this.inputBox.focus()

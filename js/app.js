@@ -14,6 +14,13 @@ class WordScrambleGame {
         this.contentHold = document.querySelector('.content')
         this.restart = document.querySelector('.restart-btn')
         this.scoreDisplay = document.querySelector('.score')
+        this.hiScoreShow = document.querySelector('.hi-score')
+        this.play = document.querySelector('.play-btn')
+        this.startContain = document.getElementById('startGame')
+
+        this.correctWord;
+        this.points 
+        this.correctAnswer = false
 
 
         this.inputBox.focus()
@@ -81,6 +88,14 @@ class WordScrambleGame {
         // 3. Initialize the game (not sure if the positioning of this matters too much)
         this.init();
         // 4. Add event listener for the my buttons 
+        this.play.addEventListener('click', ()=> {
+            this.startContain.classList.add('d-none')
+            this.contentHold.classList.remove('d-none')
+            this.contentHold.classList.add('d-block')
+            this.shuffle()
+            this.clock()
+            this.inputBox.focus()
+        })
         this.newWordButton.addEventListener('click', ()=> {
             this.shuffle();
             this.clear();
@@ -99,7 +114,7 @@ class WordScrambleGame {
             }
         })
 
-
+        this.correctAnswer = false;
     }
 
     // initalizer 
@@ -110,26 +125,13 @@ class WordScrambleGame {
         this.restartGame()
         // this.shuffleTimer()
         // this.correct()
-        // 4. Select a random word from the array and its hint
-        // let wordObj = this.words[Math.floor(Math.random() * this.words.length)];
-        // let wordArr = wordObj.word.split(""); // Split the word into an array of characters
-
-        // Shuffle the characters of the word array
-        // for (let i = wordArr.length - 1; i > 0; i--) {
-        //     let p = Math.floor(Math.random() * (i + 1));
-        //     [wordArr[i], wordArr[p]] = [wordArr[p], wordArr[i]];
-        // }
-
-        // Update the UI to display the scrambled word and its corresponding hint
-        // this.wordText.innerText = wordArr.join(''); // Display the scrambled word
-        // this.hintText.innerText = wordObj.hint; // Display the hint
     }
     
 
     // simple method for displaying socre!!!! (order is getting out of hand but we ball)
     scoreKeep() {
         this.scoreDisplay.innerText = this.score.currScore
-        
+        this.hiScoreShow.innerText = this.score.currScore
     }
 
     hiScore() {
@@ -150,10 +152,12 @@ class WordScrambleGame {
     shuffle() {
         let wordObj = this.words[Math.floor(Math.random() * this.words.length)]; // gets random object from words
         let wordArr = wordObj.word.split(""); // Split the word into an array of characters
-        let points = wordObj.points
-
+        this.points = wordObj.points
         this.correctWord = wordObj.word
-        console.log(points);
+
+        // let index = this.words.splice(index, 1)
+
+        console.log(this.points);
 
         // Shuffle the characters of the word array (wordArr)
         for (let i = wordArr.length - 1; i > 0; i--) {
@@ -163,48 +167,38 @@ class WordScrambleGame {
 
         this.wordText.innerText = wordArr.join(''); // Display the scrambled word (thanks stack overflow and geek4geeks)
         this.hintText.innerText = wordObj.hint; // Display the hint
+
+        this.correctAnswer = false;
     }
-
-
-    //(no longer needed)
-    // shuffleTimer() {
-    //     setInterval(this.shuffle(), 3000)
-    // }
-
-    // method for correct word that i apparently do not need
-    // correct() {
-    //     let wordObj = this.words[Math.floor(Math.random() * this.words.length)];
-    //     let correctWrd;
-
-    //     correctWrd = wordObj // random word = correct word
-    //     console.log(correctWrd);
-
-    // }
 
     // 6. method for checking if the typed answer matches word array
     check() {
-        let answerBox = this.inputBox.value.toLowerCase()
-        // let correctWord = this.correct()
-        // let answer = this.wordText.innerText.toLowerCase().trim(); // useless code left as a reminder of failure
-
-        if (answerBox.trim() === '') {
-            return  // if anything text is entered do nothing
+        let answerBox = this.inputBox.value.toLowerCase().trim();
+    
+        if (answerBox === '') {
+            return; // If the answer box is empty, do nothing
         }
-
-
-        // console.log(answerBox);
+    
         if (answerBox !== this.correctWord) {
-            this.message.innerText = `${answerBox} is obviously not the answer`
-            this.inputBox.value = ''
+            this.message.innerText = `${answerBox} is obviously not the answer`;
+            this.inputBox.value = '';
         } else {
-            this.message.innerText = `I'm suprised you know that word`
-            this.shuffle()
-            this.inputBox.value = ''
-            this.inputBox.focus()
-            this.score.currScore+= 1
-            this.scoreKeep()
+            // this.words (array) find (search through array) wordObj (random word object from array) wordObj.word (random WORD from word object) which equals to this.correctWord (current wordObj)
+            let currentWordObj = this.words.find(wordObj => wordObj.word === this.correctWord);
+            // set points default to 0 and now accesses the random word objects points
+            let points = currentWordObj.points || 0;
+            this.correctAnswer = true;
+            // Update the score and display
+            this.score.currScore += points;
+            this.scoreKeep();
+            // Display message and shuffle for the next word
+            this.message.innerText = `I'm surprised you know that word`;
+            this.shuffle();
+            this.inputBox.value = '';
+            this.inputBox.focus();
         }
     }
+    
 
     // 7. method to clear screen (for new word button) // use in new level later on
     clear() {
@@ -213,7 +207,7 @@ class WordScrambleGame {
     }
 
     clock() {
-        let timeLeft = 5
+        let timeLeft = 30
         let timerId = setInterval(countdown, 1000);
 
         function countdown() {  
@@ -227,17 +221,6 @@ class WordScrambleGame {
             }
         }
     }
-
-    //(may no longer be needed)
-    // resetClock() {
-    //     // clearTimeout(this.timerId)
-    //     clearInterval(this.timerId)
-    //     // this.timer.innerText = ''
-    //     this.clock()
-
-        
-    // }
-
     gameOver() {
         this.overlay.classList.remove('d-none')
         this.overlay.classList.add('d-block')
@@ -254,13 +237,13 @@ class WordScrambleGame {
             this.clear()
             this.shuffle()
             this.scoreClear()
+            this.clock()
+            this.inputBox.focus()
         })
     }
 
     
 }
 
-
-
-// Instantiate the WordScrambleGame class
+// initalize the WordScrambleGame class
 const game = new WordScrambleGame();
