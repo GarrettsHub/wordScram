@@ -76,7 +76,17 @@ class WordScrambleGame {
                 word: 'sister',
                 hint: 'a born loser (you know who you are)',
                 points: 2
-            }
+            },
+            {
+                word: 'attack',
+                hint: 'you do this on titans',
+                points: 3
+            },
+            {
+                word: 'mole',
+                hint: 'I cant tell if this is  a pimple or a...',
+                point: 1
+            },
         ];
 
         // (forgot number but we still up) set score property?
@@ -99,7 +109,7 @@ class WordScrambleGame {
         this.newWordButton.addEventListener('click', ()=> {
             this.shuffle();
             this.clear();
-            this.scoreClear()
+            // this.scoreClear()
             // this.clock()
             // this.resetClock()
         });
@@ -211,7 +221,7 @@ class WordScrambleGame {
         let timerId = setInterval(countdown, 1000);
 
         function countdown() {  
-            console.log(timeLeft, game.timer);
+            // console.log(timeLeft, game.timer);
             if (timeLeft == 0) {
                 clearTimeout(timerId)
                 game.gameOver()
@@ -221,11 +231,16 @@ class WordScrambleGame {
             }
         }
     }
+
     gameOver() {
         this.overlay.classList.remove('d-none')
         this.overlay.classList.add('d-block')
         this.contentHold.classList.add('d-none')
         // this.overlayText.innerText = 'Games over! Time to pick up a book or two'
+    }
+
+    resetClock() {
+        clearInterval(this.clock())
     }
 
     restartGame() {
