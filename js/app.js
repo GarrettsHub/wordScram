@@ -87,6 +87,10 @@ class WordScrambleGame {
                 hint: 'I cant tell if this is  a pimple or a...',
                 point: 1
             },
+            {
+                word: 'friend',
+                hint: 'someone who you can rely on (unless it\'s an open net)'
+            }
         ];
 
         // (forgot number but we still up) set score property?
