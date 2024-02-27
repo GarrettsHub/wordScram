@@ -17,10 +17,16 @@ class WordScrambleGame {
         this.hiScoreShow = document.querySelector('.hi-score')
         this.play = document.querySelector('.play-btn')
         this.startContain = document.getElementById('startGame')
+        this.mute = document.querySelector('.mute-emp')
+        this.unmute = document.querySelector('.unmute-fill')
+        this.none = document.querySelector('.none-btn')
+        this.menu = document.querySelector('.menu-btn')
 
         this.correctWord;
         this.points 
         this.correctAnswer = false
+
+        this.mySound = new Audio('audio/jellyjam.mp3')
 
 
         this.inputBox.focus()
@@ -89,9 +95,13 @@ class WordScrambleGame {
             },
             {
                 word: 'friend',
-                hint: 'someone who you can rely on (unless it\'s an open net)'
+                hint: 'someone who you can rely on (unless it\'s an open net)',
+                points: 1
             }
         ];
+        // end of words array
+
+
 
         // (forgot number but we still up) set score property?
         this.score = {
@@ -128,6 +138,34 @@ class WordScrambleGame {
             }
         })
 
+        this.unmute.addEventListener('click', ()=> {
+            this.mute.classList.add('d-block')
+            this.mute.classList.remove('d-none')
+            this.unmute.classList.add('d-none')
+            this.mySound.play()
+        })
+
+        this.mute.addEventListener('click', ()=> {
+            this.unmute.classList.add('d-block')
+            this.unmute.classList.remove('d-none')
+            this.mute.classList.add('d-none')
+            this.mute.classList.remove('d-block')
+            this.mySound.pause()
+        })
+
+        this.none.addEventListener('click', ()=> {
+            this.overlay.style.backgroundImage = 'none'
+        })
+
+        this.menu.addEventListener('click', ()=> {
+            this.overlay.classList.add('d-none')
+            this.startContain.classList.remove('d-none')
+            this.startContain.classList.add('d-block')
+            this.clear()
+            this.scoreClear()
+            this.mySound.load()
+        })
+
         this.correctAnswer = false;
     }
 
@@ -139,6 +177,7 @@ class WordScrambleGame {
         this.restartGame()
         // this.shuffleTimer()
         // this.correct()
+        // this.audio()
     }
     
 
@@ -221,7 +260,7 @@ class WordScrambleGame {
     }
 
     clock() {
-        let timeLeft = 30
+        let timeLeft = 10
         let timerId = setInterval(countdown, 1000);
 
         function countdown() {  
@@ -243,6 +282,13 @@ class WordScrambleGame {
         // this.overlayText.innerText = 'Games over! Time to pick up a book or two'
     }
 
+    backToMenu() {
+        this.startContain.classList.remove('d-none')
+        this.startContain.classList.add('d-block')
+        this.contentHold.classList.add('d-none')
+        this.contentHold.classList.remove('d-block')
+    }
+
     resetClock() {
         clearInterval(this.clock())
     }
@@ -253,6 +299,10 @@ class WordScrambleGame {
             this.overlay.classList.remove('d-block')
             this.contentHold.classList.remove('d-none')
             this.contentHold.classList.add('d-block')
+            this.mute.classList.remove('d-block')
+            this.mute.classList.add('d-none')
+            this.unmute.classList.remove('d-none')
+            this.unmute.classList.add('d-block')
             this.clear()
             this.shuffle()
             this.scoreClear()

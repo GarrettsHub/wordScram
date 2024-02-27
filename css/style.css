@@ -13,6 +13,38 @@ body {
     border-bottom: 2px solid gray;
 }
 
+.mute-box {
+    position: relative;
+}
+
+.sound-btn {
+    position: absolute;
+}
+
+.sound-text {
+    font-weight: 700;
+    position: absolute;
+    left: 10px;
+    top: 50px;
+}
+
+.remove-div {
+    position: absolute;
+    top: 500px;
+}
+
+.none-btn {
+    background-color: deeppink;
+    text-transform: uppercase;
+    color: whitesmoke;
+    margin-left: 75px;
+}
+
+.none-btn:hover {
+    background-color: #bb156e;
+    color: whitesmoke;
+}
+
 .content-hold {
     width: 650px;
     background-color: whitesmoke;
@@ -78,6 +110,7 @@ body {
     right: 0;
     bottom: 0;
     background-color: #333;
+    background-image: url("../images/jelly.gif");
     z-index: 2;
 }
 
@@ -88,6 +121,12 @@ body {
     font-size: 50px;
     color: white;
     transform: translate(-50%, -50%);
+}
+
+.fin-text {
+    background-color: #0000004d;
+    font-weight: 900;
+    text-shadow: black 1px 0 10px;
 }
 
 .start-game {

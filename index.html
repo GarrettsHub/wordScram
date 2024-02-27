@@ -16,14 +16,34 @@
     </header>
 
     <main class="main" id="main">
+        <div class="mute-box">
+            <button class="btn sound-btn mute-emp d-none">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-volume-mute" viewBox="0 0 16 16">
+                    <path d="M6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06M6 5.04 4.312 6.39A.5.5 0 0 1 4 6.5H2v3h2a.5.5 0 0 1 .312.11L6 10.96zm7.854.606a.5.5 0 0 1 0 .708L12.207 8l1.647 1.646a.5.5 0 0 1-.708.708L11.5 8.707l-1.646 1.647a.5.5 0 0 1-.708-.708L10.793 8 9.146 6.354a.5.5 0 1 1 .708-.708L11.5 7.293l1.646-1.647a.5.5 0 0 1 .708 0"/>
+                </svg>
+                <span class="visually-hidden">mute button</span>
+            </button>
+            <button class="btn sound-btn unmute-fill">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-volume-mute-fill" viewBox="0 0 16 16">
+                    <path d="M6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06m7.137 2.096a.5.5 0 0 1 0 .708L12.207 8l1.647 1.646a.5.5 0 0 1-.708.708L11.5 8.707l-1.646 1.647a.5.5 0 0 1-.708-.708L10.793 8 9.146 6.354a.5.5 0 1 1 .708-.708L11.5 7.293l1.646-1.647a.5.5 0 0 1 .708 0"/>
+                </svg>
+                <span class="visually-hidden">unmute button</span>
+            </button>
+            <p class="sound-text">
+                <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-90deg-up" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M4.854 1.146a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L4 2.707V12.5A2.5 2.5 0 0 0 6.5 15h8a.5.5 0 0 0 0-1h-8A1.5 1.5 0 0 1 5 12.5V2.707l3.146 3.147a.5.5 0 1 0 .708-.708z"/>
+            </svg></span>
+            click here for peak tunes</p>
+        </div>
         <div class="container content-hold">
             <div class="start-game" id="startGame">
                 <div class="intro-text d-flex">
-                    <p class="yap-text">Welcome to Word Unscramble! Try to guess as many scrambled words correctly and gain the most points in 30 seconds. The harder the word, the more points you're rewarded with and maybe one day you can be as cool as me.</p>
+                    <p class="yap-text">Welcome to Word Unscramble! Try to guess as many scrambled words correctly and gain the most points in 60 seconds. The harder the word, the more points you're rewarded with and maybe one day you can be as cool as me.</p>
                     <img src="images/moneybob.jpeg" alt="spongebob but with money">
                 </div>
                 <div class="play-btn-div ">
                     <button class="btn play-btn btn-success" id="playBtn">Play!</button>
+                    <button class="none-btn btn btn-info">click here to disable flash</button>
                 </div>
             </div>
             <div class="content d-none">
@@ -46,9 +66,10 @@
             <div id="messageBox"></div>
             <div id="timeUp" class="d-none">
                 <div class="time-up-text">
-                    <h2 class="over-title">Game Over!</h2>
-                    <p class="High-score-text">You finished with <span class="hi-score"></span> points!</p>
+                    <h2 class="over-title fin-text">Game Over!</h2>
+                    <p class="High-score-text fin-text">You finished with <span class="hi-score"></span> points!</p>
                     <button class="btn restart-btn btn-danger">Try again</button>
+                    <button class="btn menu-btn btn-success">Return to menu</button>
                 </div>
             </div>
         </div>
