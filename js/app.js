@@ -97,6 +97,61 @@ class WordScrambleGame {
                 word: 'friend',
                 hint: 'someone who you can rely on (unless it\'s an open net)',
                 points: 1
+            },
+            {
+                word: 'night',
+                hint: 'opposite of day',
+                points: 1
+            },
+            {
+                word: 'dominate',
+                hint: 'having supreme authority',
+                points: 5
+            },
+            {
+                word: 'confused',
+                hint: 'wait i dont get it',
+                points: 3
+            },
+            {
+                word: 'suggest',
+                hint: 'to mention as an idea',
+                points: 2
+            },
+            {
+                word: 'doubt',
+                hint: 'what you\'re feeling since you can\'t guess a word right',
+                points: 1
+            },
+            {
+                word: 'forest',
+                hint: 'go here at night if you\'re insane',
+                points: 2
+            },
+            {
+                word: 'normal',
+                hint: 'nothing out of the ordinary (like this game)',
+                points: 2
+            },
+            {
+                word: 'planet',
+                hint: 'earth, mars, venus or that movie with the apes',
+                points: 2
+            },
+            {
+                word: 'black',
+                hint: 'obama, malcom x, and bobby caldwell are this',
+                points: 1
+            },
+            {
+                word: 'frighten',
+                hint: 'to cause fear (like any apple alarm ringtone)',
+                points: 4
+            },
+            {
+                word: 'shatter',
+                hint: 'to break into many pieces',
+                points: 2
             }
         ];
         // end of words array
@@ -161,6 +216,10 @@ class WordScrambleGame {
             this.overlay.classList.add('d-none')
             this.startContain.classList.remove('d-none')
             this.startContain.classList.add('d-block')
+            this.mute.classList.remove('d-block')
+            this.mute.classList.add('d-none')
+            this.unmute.classList.remove('d-none')
+            this.unmute.classList.add('d-block')
             this.clear()
             this.scoreClear()
             this.mySound.load()
@@ -299,10 +358,7 @@ class WordScrambleGame {
             this.overlay.classList.remove('d-block')
             this.contentHold.classList.remove('d-none')
             this.contentHold.classList.add('d-block')
-            this.mute.classList.remove('d-block')
-            this.mute.classList.add('d-none')
-            this.unmute.classList.remove('d-none')
-            this.unmute.classList.add('d-block')
+        
             this.clear()
             this.shuffle()
             this.scoreClear()
