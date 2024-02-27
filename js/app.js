@@ -227,7 +227,7 @@ class WordScrambleGame {
 
         this.correctAnswer = false;
     }
-
+    
     // initalizer 
     init() {
         this.shuffle()
@@ -240,7 +240,7 @@ class WordScrambleGame {
     }
     
 
-    // simple method for displaying socre!!!! (order is getting out of hand but we ball)
+    // simple method for displaying socre (order is getting out of hand but we ball)
     scoreKeep() {
         this.scoreDisplay.innerText = this.score.currScore
         this.hiScoreShow.innerText = this.score.currScore
@@ -312,14 +312,14 @@ class WordScrambleGame {
     }
     
 
-    // 7. method to clear screen (for new word button) // use in new level later on
+    // 7. method to clear screen (for new word button) // 
     clear() {
         this.inputBox.value = ''
         this.message.innerText = ''
     }
 
     clock() {
-        let timeLeft = 10
+        let timeLeft = 30
         let timerId = setInterval(countdown, 1000);
 
         function countdown() {  
@@ -334,22 +334,15 @@ class WordScrambleGame {
         }
     }
 
+    resetClock() {
+        clearInterval(this.clock())
+    }
+
     gameOver() {
         this.overlay.classList.remove('d-none')
         this.overlay.classList.add('d-block')
         this.contentHold.classList.add('d-none')
         // this.overlayText.innerText = 'Games over! Time to pick up a book or two'
-    }
-
-    backToMenu() {
-        this.startContain.classList.remove('d-none')
-        this.startContain.classList.add('d-block')
-        this.contentHold.classList.add('d-none')
-        this.contentHold.classList.remove('d-block')
-    }
-
-    resetClock() {
-        clearInterval(this.clock())
     }
 
     restartGame() {
