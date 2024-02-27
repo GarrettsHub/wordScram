@@ -227,7 +227,7 @@ class WordScrambleGame {
 
         this.correctAnswer = false;
     }
-    
+
     // initalizer 
     init() {
         this.shuffle()
@@ -319,7 +319,7 @@ class WordScrambleGame {
     }
 
     clock() {
-        let timeLeft = 30
+        let timeLeft = 60
         let timerId = setInterval(countdown, 1000);
 
         function countdown() {  
